@@ -1,19 +1,19 @@
 const axios = require("axios");
 
 module.exports.index = async (req, res) => {
-	var list = [];
-	var vietnam = [];
-	var sorts = [
+	let list = [];
+	let vietnam = [];
+	const sorts = [
 		{ value: "deaths", display: "Số ca tử vong" },
 		{ value: "cases", display: "Tổng số ca nhiễm" },
 		{ value: "todayCases", display: "Số ca nhiễm hôm nay" },
 		{ value: "todayDeaths", display: "Số ca tử vong hôm nay" }
 	];
-	const all = await axios({
+	let all = await axios({
 		url: "https://corona.lmao.ninja/all",
 		method: "get"
 	});
-	const countries = await axios({
+	let countries = await axios({
 		url: "https://corona.lmao.ninja/countries?sort=deaths&order=desc",
 		method: "get"
 	});
@@ -29,34 +29,34 @@ module.exports.index = async (req, res) => {
 	});
 };
 module.exports.search = async (req, res) => {
-	var list = [];
-	var q = req.query.q;
-	var sort = req.query.sort;
-	var sorts = [
+	let list = [];
+	let q = req.query.q;
+	let sort = req.query.sort;
+	const sorts = [
 		{ value: "deaths", display: "Số ca tử vong" },
 		{ value: "cases", display: "Tổng số ca nhiễm" },
 		{ value: "todayCases", display: "Số ca nhiễm hôm nay" },
 		{ value: "todayDeaths", display: "Số ca tử vong hôm nay" }
 	];
 
-	const all = await axios({
+	let all = await axios({
 		url: "https://corona.lmao.ninja/all",
 		method: "get"
 	});
 
-	const vietnam = await axios({
+	let vietnam = await axios({
 		url: "https://corona.lmao.ninja/countries/Vietnam",
 		method: "get"
 	});
 
-	const options = await axios({
+	let options = await axios({
 		url: "https://corona.lmao.ninja/countries?sort=deaths&order=desc",
 		method: "get"
 	});
 	options.data.sort((a, b) => a.country.localeCompare(b.country));
 
-	var url = "https://corona.lmao.ninja/countries/" + q;
-	const countries = await axios({
+	let url = "https://corona.lmao.ninja/countries/" + q;
+	let countries = await axios({
 		url: url,
 		method: "get"
 	});
