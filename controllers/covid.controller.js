@@ -1,10 +1,14 @@
 const axios = require("axios");
-const Sort = require("../models/Sort.model");
 
 module.exports.index = async (req, res) => {
 	var list = [];
 	var vietnam = [];
-	var sorts = await Sort.find();
+	var sorts = [
+		{ value: "deaths", display: "Số ca tử vong" },
+		{ value: "cases", display: "Tổng số ca nhiễm" },
+		{ value: "todayCases", display: "Số ca nhiễm hôm nay" },
+		{ value: "todayDeaths", display: "Số ca tử vong hôm nay" }
+	];
 	const all = await axios({
 		url: "https://corona.lmao.ninja/all",
 		method: "get"
@@ -28,7 +32,12 @@ module.exports.search = async (req, res) => {
 	var list = [];
 	var q = req.query.q;
 	var sort = req.query.sort;
-	var sorts = await Sort.find();
+	var sorts = [
+		{ value: "deaths", display: "Số ca tử vong" },
+		{ value: "cases", display: "Tổng số ca nhiễm" },
+		{ value: "todayCases", display: "Số ca nhiễm hôm nay" },
+		{ value: "todayDeaths", display: "Số ca tử vong hôm nay" }
+	];
 
 	const all = await axios({
 		url: "https://corona.lmao.ninja/all",
