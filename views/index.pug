@@ -1,0 +1,90 @@
+html 
+    head
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css")
+    body.bg-light
+        .container
+            .row.mb-3
+                .col-sm-12.col-md-12.col-lg-12.text-center
+                    p.h2 Thế giới
+                    table.table
+                        thead.thead-light
+                            tr
+                                th(scope="col") Phạm vi
+                                th(scope='col') Tổng số ca nhiễm                                
+                                th(scope='col') Tử vong
+                                th(scope='col') Phục hồi  
+                                th(scope='col') Số quốc gia ảnh hưởng                              
+                        tbody                            
+                            th(scope="col") Thế giới
+                            td= all.cases
+                            td= all.deaths
+                            td= all.recovered
+                            td= all.affectedCountries
+            .row.mb-3
+                .col-sm-12.col-md-12.col-lg-12.text-center
+                    p.h2 Việt Nam
+                    table.table
+                        thead.thead-light
+                            tr
+                                th(scope="col") Phạm vi
+                                th(scope='col') Tổng số ca nhiễm
+                                th(scope='col') Số ca nhiễm hôm nay
+                                th(scope='col') Tử vong
+                                th(scope='col') Số ca tử vong hôm nay
+                                th(scope='col') Phục hồi  
+                                th(scope='col') Trong tình trạng nguy cấp                              
+                        tbody                            
+                            tr
+                                th(scope="col")= vietnam.country 
+                                td= vietnam.cases
+                                td= vietnam.todayCases
+                                td= vietnam.deaths
+                                td= vietnam.todayDeaths
+                                td= vietnam.recovered
+                                td= vietnam.critical 
+            .row.mb-3
+                .col-sm-12.col-md-12.col-lg-12.text-center
+                    p.h2 Các quốc gia khác                    
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    form.form-inline(action="/search", method="GET")
+                        .form-group
+                            label.mr-2(for="country") Quốc gia
+                            select#country.form-control(name="q")
+                                option(value=" ") Tất cả
+                                each country in options
+                                    if keySearch == country.country
+                                        option(value=country.country, selected)= country.country
+                                    else 
+                                        option(value=country.country)= country.country
+                        .form-group.ml-3
+                            label.mr-2(for="sort") Sắp xếp
+                            select#sort.form-control(name="sort")                                
+                                each item in sorts
+                                    if keySort == item.value
+                                        option(value= item.value, selected)= item.display
+                                    else
+                                        option(value= item.value)= item.display                                 
+                        button.btn.btn-primary.ml-3(type='submit') Tìm kiếm                
+            .row
+                .col-sm-12.col-md-12.col-lg-12
+                    table.table.table-hover
+                        thead.thead-light
+                            tr
+                                th(scope="col") Phạm vi
+                                th(scope='col') Tổng số ca nhiễm
+                                th(scope='col') Số ca nhiễm hôm nay
+                                th(scope='col') Tử vong
+                                th(scope='col') Số ca tử vong hôm nay
+                                th(scope='col') Phục hồi  
+                                th(scope='col') Trong tình trạng nguy cấp                              
+                        tbody
+                            each country in countries
+                                tr
+                                    th(scope="col")= country.country 
+                                    td= country.cases
+                                    td= country.todayCases
+                                    td= country.deaths
+                                    td= country.todayDeaths
+                                    td= country.recovered
+                                    td= country.critical 
