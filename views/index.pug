@@ -53,8 +53,7 @@ html
             .row
                 .col-sm-12.col-md-12.col-lg-12
                     form.form-inline(action="/search", method="GET")
-                        .form-group
-                            label.mr-2(for="country") Quốc gia
+                        .form-group                           
                             select#country.form-control(name="q")
                                 option(value=" ") Tất cả
                                 each country in options
